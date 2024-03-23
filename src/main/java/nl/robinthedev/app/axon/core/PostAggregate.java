@@ -19,6 +19,10 @@ class PostAggregate {
   @AggregateIdentifier
   PostId postId;
 
+  public PostAggregate() {
+    //required by Axon
+  }
+
   @CommandHandler
   @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
   void handle(CreatePost createPost) {
