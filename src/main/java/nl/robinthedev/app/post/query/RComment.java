@@ -1,4 +1,4 @@
 package nl.robinthedev.app.post.query;
 
-public record RComment(String text) {
+record RComment(String text) {
 }
