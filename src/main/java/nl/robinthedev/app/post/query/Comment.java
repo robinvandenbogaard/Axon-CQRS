@@ -1,4 +1,4 @@
-package nl.robinthedev.app.qs;
+package nl.robinthedev.app.post.query;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

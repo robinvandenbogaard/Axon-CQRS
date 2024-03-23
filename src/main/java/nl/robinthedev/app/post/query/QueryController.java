@@ -1,4 +1,4 @@
-package nl.robinthedev.app.qs;
+package nl.robinthedev.app.post.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
