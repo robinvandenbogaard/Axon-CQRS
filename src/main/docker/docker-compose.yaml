@@ -9,3 +9,13 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
+  axon-server:
+    image: axoniq/axonserver:latest
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    environment:
+      - AXONIQ_AXONSERVER_HOSTNAME=axon-server
+      - AXONIQ_AXONSERVER_STANDALONE=true
+      - axoniq.axonserver.accesscontrol.enabled=false

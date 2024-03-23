@@ -11,3 +11,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+axon:
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
+  axonserver:
+    servers: localhost:8124
