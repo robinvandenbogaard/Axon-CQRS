@@ -1,7 +1,9 @@
 package nl.robinthedev.app.post.command;
 
+import jakarta.websocket.server.PathParam;
+import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
-import nl.robinthedev.app.api.model.NewPost;
+import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.PostId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.http.HttpStatus;
@@ -24,9 +26,16 @@ class PostCommandController {
   }
 
   @PostMapping("/posts")
-  public ResponseEntity<PostId> createPost(@RequestBody NewPost post) {
+  public ResponseEntity<PostId> createPost(@RequestBody RNewPost post) {
     PostId id = new PostId(UUID.randomUUID());
     gateway.send(new CreatePost(id, post.title(), post.content()));
+    return new ResponseEntity<>(id, HttpStatus.CREATED);
+  }
+
+  @PostMapping("/posts/{postId}")
+  public ResponseEntity<CommentId> createPost(@PathParam ("postId") UUID postId, @RequestBody RNewComment comment) {
+    CommentId id = new CommentId(UUID.randomUUID());
+    gateway.send(new AddComment(new PostId(postId), id, comment.text()));
     return new ResponseEntity<>(id, HttpStatus.CREATED);
   }
 }
