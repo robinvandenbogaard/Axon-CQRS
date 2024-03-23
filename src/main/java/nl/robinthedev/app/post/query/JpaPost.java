@@ -6,11 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
 @Entity
-class Post {
+@Table(name = "post")
+class JpaPost {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,16 @@ class Post {
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-  private List<Comment> comments;
+  private List<JpaComment> comments;
+
+  protected JpaPost() {
+    //required by Hibernate
+  }
+
+  public JpaPost(String title, String content) {
+    this.title = title;
+    this.content = content;
+  }
 
   public String getTitle() {
     return title;
@@ -31,7 +42,7 @@ class Post {
     return content;
   }
 
-  public List<Comment> getComments() {
+  public List<JpaComment> getComments() {
     return comments;
   }
 }

@@ -6,9 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-class Comment {
+@Table(name = "comment")
+class JpaComment {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,7 @@ class Comment {
 
   @ManyToOne
   @JoinColumn(name = "post_id")
-  private Post post;
+  private JpaPost post;
 
   public String getText() {
     return text;

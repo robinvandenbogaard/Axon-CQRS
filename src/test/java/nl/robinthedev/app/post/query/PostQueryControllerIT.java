@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("posts.sql")
 @Transactional
 @AutoConfigureMockMvc
-class QueryControllerIT {
+class PostQueryControllerIT {
 
   @Autowired
   private MockMvc mockMvc;

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-class QueryController {
+class PostQueryController {
 
   @Autowired
   private PostService postService;
@@ -30,8 +30,8 @@ class QueryController {
   }
 
   @GetMapping("/posts/{postId}/comments")
-  public ResponseEntity<List<Comment>> getCommentsForPost(@PathVariable("postId") Long postId) {
-    List<Comment> comments = postService.getCommentsForPost(postId);
+  public ResponseEntity<List<JpaComment>> getCommentsForPost(@PathVariable("postId") Long postId) {
+    List<JpaComment> comments = postService.getCommentsForPost(postId);
     return new ResponseEntity<>(comments, HttpStatus.OK);
   }
 }

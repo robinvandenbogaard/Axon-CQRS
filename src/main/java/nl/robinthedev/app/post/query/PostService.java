@@ -17,15 +17,15 @@ class PostService {
     return postRepository.findAll().stream().map(this::toDto).toList();
   }
 
-  private RPost toDto(Post entity) {
+  private RPost toDto(JpaPost entity) {
     return new RPost(entity.getTitle(), entity.getContent(), toDto(entity.getComments()));
   }
 
-  private List<RComment> toDto(List<Comment> comments) {
+  private List<RComment> toDto(List<JpaComment> comments) {
     return comments.stream().map(this::toDto).toList();
   }
 
-  private RComment toDto(Comment entity) {
+  private RComment toDto(JpaComment entity) {
     return new RComment(entity.getText());
   }
 
@@ -33,8 +33,8 @@ class PostService {
     return postRepository.findById(postId).map(this::toDto).orElse(null);
   }
 
-  public List<Comment> getCommentsForPost(Long postId) {
-    Post post = postRepository.findById(postId).orElse(null);
+  public List<JpaComment> getCommentsForPost(Long postId) {
+    JpaPost post = postRepository.findById(postId).orElse(null);
     if (post != null) {
       return post.getComments();
     }
