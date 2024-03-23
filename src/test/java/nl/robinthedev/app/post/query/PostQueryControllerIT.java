@@ -28,14 +28,14 @@ class PostQueryControllerIT {
     mockMvc.perform(get("/api/posts"))
            .andExpect(status().isOk())
            .andExpect(content().json("""
-            [{
-              "id": "52b9d5d0-4959-4c3d-a390-b415ec9dfaaa",
-              "title": "Story of my life",
-              "text": "Let me tell you what happened.",
-              comments: [{
-                "text": "Unbelievable!"
-              }]
-            }]
-            """));
+                   [{
+                     "id": "52b9d5d0-4959-4c3d-a390-b415ec9dfaaa",
+                     "title": "Story of my life",
+                     "text": "Let me tell you what happened.",
+                     comments: [{
+                       "text": "Unbelievable!"
+                     }]
+                   }]
+                   """));
   }
 }

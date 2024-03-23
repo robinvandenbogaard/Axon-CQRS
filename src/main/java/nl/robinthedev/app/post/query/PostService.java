@@ -33,20 +33,6 @@ class PostService {
   }
 
   @Transactional
-  public RPost getPostById(Long postId) {
-    return postRepository.findById(postId).map(this::toDto).orElse(null);
-  }
-
-  @Transactional
-  public List<JpaComment> getCommentsForPost(Long postId) {
-    JpaPost post = postRepository.findById(postId).orElse(null);
-    if (post != null) {
-      return post.getComments();
-    }
-    return null;
-  }
-
-  @Transactional
   public void createPost(JpaPost post) {
     postRepository.save(post);
   }

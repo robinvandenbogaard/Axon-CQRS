@@ -16,7 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,10 +54,12 @@ class PostCommandControllerTest {
 
   @Test
   void addComment() throws Exception {
-    mockMvc.perform(post("/api/posts/68eefe7a-6ef3-4003-98ea-87a6eab49756").contentType(MediaType.APPLICATION_JSON).content("""
-            {
-              "text": "My remark."
-            }""")).andExpect(status().isCreated());
+    mockMvc.perform(post("/api/posts/68eefe7a-6ef3-4003-98ea-87a6eab49756").contentType(MediaType.APPLICATION_JSON)
+                                                                           .content("""
+                                                                                   {
+                                                                                     "text": "My remark."
+                                                                                   }"""))
+           .andExpect(status().isCreated());
 
     verify(gateway).send(new AddComment(new PostId(UUID.fromString("68eefe7a-6ef3-4003-98ea-87a6eab49756")), new CommentId(ID), "My remark."));
   }
