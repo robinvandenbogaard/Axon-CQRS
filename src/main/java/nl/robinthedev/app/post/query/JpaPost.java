@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ class JpaPost {
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-  private List<JpaComment> comments;
+  private List<JpaComment> comments = new ArrayList<>();
 
   protected JpaPost() {
     //required by Hibernate
@@ -53,5 +54,10 @@ class JpaPost {
 
   public UUID getPublicId() {
     return publicId;
+  }
+
+  public void addComment(JpaComment comment) {
+    this.comments.add(comment);
+    comment.setPost(this);
   }
 }

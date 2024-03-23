@@ -8,6 +8,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "comment")
 class JpaComment {
@@ -16,14 +18,32 @@ class JpaComment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private UUID publicId;
+
   private String text;
 
   @ManyToOne
   @JoinColumn(name = "post_id")
   private JpaPost post;
 
+  public JpaComment() {
+    //required by Hibernate
+  }
+
+  public JpaComment(String text) {
+    this.text = text;
+  }
+
   public String getText() {
     return text;
+  }
+
+  public void setPost(JpaPost post) {
+    this.post = post;
+  }
+
+  public UUID getPublicId() {
+    return publicId;
   }
 }
 
