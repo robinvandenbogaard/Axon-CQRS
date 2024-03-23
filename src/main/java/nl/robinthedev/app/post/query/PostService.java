@@ -40,4 +40,8 @@ class PostService {
     }
     return null;
   }
+
+  public JpaPost createPost(JpaPost post) {
+    return postRepository.save(post);
+  }
 }
