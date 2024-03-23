@@ -18,7 +18,7 @@ class PostService {
   }
 
   private RPost toDto(JpaPost entity) {
-    return new RPost(entity.getTitle(), entity.getContent(), toDto(entity.getComments()));
+    return new RPost(entity.getPublicId(), entity.getTitle(), entity.getContent(), toDto(entity.getComments()));
   }
 
   private List<RComment> toDto(List<JpaComment> comments) {
@@ -41,7 +41,7 @@ class PostService {
     return null;
   }
 
-  public JpaPost createPost(JpaPost post) {
-    return postRepository.save(post);
+  public void createPost(JpaPost post) {
+    postRepository.save(post);
   }
 }

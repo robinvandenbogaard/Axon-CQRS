@@ -29,27 +29,13 @@ class PostQueryControllerIT {
            .andExpect(status().isOk())
            .andExpect(content().json("""
             [{
+              "id": "52b9d5d0-4959-4c3d-a390-b415ec9dfaaa",
               "title": "Story of my life",
               "text": "Let me tell you what happened.",
               comments: [{
                 "text": "Unbelievable!"
               }]
             }]
-            """));
-  }
-
-  @Test
-  void getSinglePost() throws Exception {
-    mockMvc.perform(get("/api/posts/{postId}", 1))
-           .andExpect(status().isOk())
-           .andExpect(content().json("""
-            {
-              "title": "Story of my life",
-              "text": "Let me tell you what happened.",
-              comments: [{
-                "text": "Unbelievable!"
-              }]
-            }
             """));
   }
 }

@@ -17,7 +17,7 @@ class PostEventHandler {
   @EventHandler
   void handle(PostCreated postCreated) {
     Post post = postCreated.post();
-    JpaPost entity = new JpaPost(post.title(), post.content());
+    JpaPost entity = new JpaPost(postCreated.postId().externalId(), post.title(), post.content());
     postService.createPost(entity);
   }
 }
