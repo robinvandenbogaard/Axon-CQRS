@@ -4,6 +4,7 @@ import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
+import nl.robinthedev.app.api.model.Comment;
 import nl.robinthedev.app.api.model.Post;
 import nl.robinthedev.app.api.model.PostId;
 import org.axonframework.commandhandling.CommandHandler;
@@ -25,7 +26,7 @@ class PostAggregate {
   @AggregateIdentifier
   PostId postId;
 
-  List<String> comments = new ArrayList<>();
+  List<Comment> comments = new ArrayList<>();
 
   public PostAggregate() {
     //required by Axon
@@ -44,11 +45,11 @@ class PostAggregate {
 
   @CommandHandler
   void handle(AddComment addComment) {
-    apply(new CommentAdded(addComment.postId(), addComment.id(), addComment.text()));
+    apply(new CommentAdded(addComment.postId(), new Comment(addComment.id(), addComment.text())));
   }
 
   @EventSourcingHandler
   void handle(CommentAdded commentAdded) {
-    comments.add(commentAdded.text());
+    comments.add(commentAdded.comment());
   }
 }

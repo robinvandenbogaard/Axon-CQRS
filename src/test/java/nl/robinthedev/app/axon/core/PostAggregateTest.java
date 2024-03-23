@@ -4,6 +4,7 @@ import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
+import nl.robinthedev.app.api.model.Comment;
 import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.Post;
 import nl.robinthedev.app.api.model.PostId;
@@ -38,6 +39,6 @@ class PostAggregateTest {
     fixture.given(new PostCreated(POST_ID, new Post("a", "b")))
            .when(new AddComment(POST_ID, commentId, "c"))
            .expectSuccessfulHandlerExecution()
-           .expectEvents(new CommentAdded(POST_ID, commentId, "c"));
+           .expectEvents(new CommentAdded(POST_ID, new Comment(commentId, "c")));
   }
 }
