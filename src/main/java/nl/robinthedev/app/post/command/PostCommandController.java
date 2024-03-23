@@ -1,6 +1,5 @@
 package nl.robinthedev.app.post.command;
 
-import nl.robinthedev.app.UuidGenerator;
 import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
 import nl.robinthedev.app.api.model.CommentId;
@@ -36,7 +35,7 @@ class PostCommandController {
   }
 
   @PostMapping("/posts/{postId}")
-  public ResponseEntity<CommentId> createComment(@PathVariable("postId") UUID postId, @RequestBody RNewComment comment) {
+  public ResponseEntity<CommentId> addComment(@PathVariable("postId") UUID postId, @RequestBody RNewComment comment) {
     CommentId id = new CommentId(idGenerator.generateId());
     gateway.send(new AddComment(new PostId(postId), id, comment.text()));
     return new ResponseEntity<>(id, HttpStatus.CREATED);

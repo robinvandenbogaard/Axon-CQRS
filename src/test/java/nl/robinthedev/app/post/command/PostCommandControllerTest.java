@@ -1,6 +1,5 @@
 package nl.robinthedev.app.post.command;
 
-import nl.robinthedev.app.UuidGenerator;
 import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
 import nl.robinthedev.app.api.model.CommentId;

@@ -1,4 +1,4 @@
-package nl.robinthedev.app;
+package nl.robinthedev.app.post.command;
 
 import org.springframework.stereotype.Component;
 
