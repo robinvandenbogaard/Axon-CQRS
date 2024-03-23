@@ -33,6 +33,7 @@ class PostQueryControllerIT {
                      "title": "Story of my life",
                      "text": "Let me tell you what happened.",
                      comments: [{
+                       "id": "ce6ef61b-292a-4b30-a172-d5355a6c6e19",
                        "text": "Unbelievable!"
                      }]
                    }]

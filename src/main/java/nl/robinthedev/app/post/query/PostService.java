@@ -29,7 +29,7 @@ class PostService {
   }
 
   private RComment toDto(JpaComment entity) {
-    return new RComment(entity.getText());
+    return new RComment(entity.getPublicId(), entity.getText());
   }
 
   @Transactional

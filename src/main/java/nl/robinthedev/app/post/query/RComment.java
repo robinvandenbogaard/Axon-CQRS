@@ -1,4 +1,6 @@
 package nl.robinthedev.app.post.query;
 
-record RComment(String text) {
+import java.util.UUID;
+
+record RComment(UUID id, String text) {
 }
