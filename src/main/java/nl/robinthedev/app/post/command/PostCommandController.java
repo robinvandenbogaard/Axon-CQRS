@@ -36,17 +36,17 @@ class PostCommandController {
     return new ResponseEntity<>(id, HttpStatus.CREATED);
   }
 
-  @PostMapping("/posts/{postId}")
+  @PostMapping("/posts/{postId}/addcomment")
   public ResponseEntity<CommentId> addComment(@PathVariable("postId") UUID postId, @RequestBody RNewComment comment) {
     CommentId id = new CommentId(idGenerator.generateId());
     gateway.send(new AddComment(new PostId(postId), id, comment.text()));
     return new ResponseEntity<>(id, HttpStatus.CREATED);
   }
 
-  @PutMapping("/comments/{commentId}")
-  public ResponseEntity<CommentId> updateComment(@PathVariable("commentId") UUID commentUuid, @RequestBody RNewComment comment) {
+  @PutMapping("/posts/{postId}/comments/{commentId}/update")
+  public ResponseEntity<CommentId> updateComment(@PathVariable("postId") UUID postId, @PathVariable("commentId") UUID commentUuid, @RequestBody RNewComment comment) {
     CommentId commentId = new CommentId(commentUuid);
-    gateway.send(new UpdateComment(commentId, comment.text()));
+    gateway.send(new UpdateComment(new PostId(postId), commentId, comment.text()));
     return new ResponseEntity<>(commentId, HttpStatus.OK);
   }
 }

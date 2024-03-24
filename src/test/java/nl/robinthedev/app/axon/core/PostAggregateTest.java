@@ -2,7 +2,9 @@ package nl.robinthedev.app.axon.core;
 
 import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
+import nl.robinthedev.app.api.messaging.command.UpdateComment;
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.event.CommentUpdated;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
 import nl.robinthedev.app.api.model.Comment;
 import nl.robinthedev.app.api.model.CommentId;
@@ -26,18 +28,28 @@ class PostAggregateTest {
   }
 
   @Test
-  public void testPostCreationCommand() {
+  public void testCreatePostCommand() {
     fixture.when(new CreatePost(POST_ID, "a", "b"))
            .expectSuccessfulHandlerExecution()
            .expectEvents(new PostCreated(POST_ID, new Post("a", "b")));
   }
 
   @Test
-  public void testCommentAdditionCreationCommand() {
+  public void testAddCommentCommand() {
     CommentId commentId = new CommentId(UUID.randomUUID());
     fixture.given(new PostCreated(POST_ID, new Post("a", "b")))
            .when(new AddComment(POST_ID, commentId, "c"))
            .expectSuccessfulHandlerExecution()
            .expectEvents(new CommentAdded(POST_ID, new Comment(commentId, "c")));
+  }
+
+  @Test
+  public void testUpdateCommentCommand() {
+    CommentId commentId = new CommentId(UUID.randomUUID());
+    fixture.given(new PostCreated(POST_ID, new Post("a", "b")))
+           .andGiven(new CommentAdded(POST_ID, new Comment(commentId, "c")))
+           .when(new UpdateComment(POST_ID, commentId, "d"))
+           .expectSuccessfulHandlerExecution()
+           .expectEvents(new CommentUpdated(commentId, "c", "d"));
   }
 }

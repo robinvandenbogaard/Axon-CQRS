@@ -13,6 +13,7 @@ import org.axonframework.modelling.command.AggregateCreationPolicy;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateMember;
 import org.axonframework.modelling.command.CreationPolicy;
+import org.axonframework.modelling.command.ForwardMatchingInstances;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ class PostAggregate {
   @AggregateIdentifier
   PostId postId;
 
-  List<Comment> comments = new ArrayList<>();
+  @AggregateMember(eventForwardingMode = ForwardMatchingInstances.class)
+  List<PostComment> comments = new ArrayList<>();
 
   public PostAggregate() {
     //required by Axon
@@ -50,6 +52,6 @@ class PostAggregate {
 
   @EventSourcingHandler
   void handle(CommentAdded commentAdded) {
-    comments.add(commentAdded.comment());
+    comments.add(new PostComment(commentAdded.comment()));
   }
 }

@@ -25,8 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PostCommandController.class)
 class PostCommandControllerTest {
 
-  public static final UUID ID = UUID.randomUUID();
-  private static final PostId POST_ID = new PostId(ID);
+  private static final UUID POST_UUID = UUID.randomUUID();
+  private static final PostId POST_ID = new PostId(POST_UUID);
+  private static final UUID COMMENT_UUID = UUID.randomUUID();
+  private static final CommentId COMMENT_ID = new CommentId(COMMENT_UUID);
 
   @Autowired
   private MockMvc mockMvc;
@@ -39,7 +41,7 @@ class PostCommandControllerTest {
 
   @BeforeEach
   void setUp() {
-    when(idGenerator.generateId()).thenReturn(ID);
+    when(idGenerator.generateId()).thenReturn(POST_UUID);
   }
 
   @Test
@@ -55,26 +57,26 @@ class PostCommandControllerTest {
 
   @Test
   void addComment() throws Exception {
-    mockMvc.perform(post("/api/posts/68eefe7a-6ef3-4003-98ea-87a6eab49756").contentType(MediaType.APPLICATION_JSON)
+    when(idGenerator.generateId()).thenReturn(COMMENT_UUID);
+    mockMvc.perform(post("/api/posts/{postId}/addcomment", POST_UUID).contentType(MediaType.APPLICATION_JSON)
                                                                            .content("""
                                                                                    {
                                                                                      "text": "My remark."
                                                                                    }"""))
            .andExpect(status().isCreated());
 
-    verify(gateway).send(new AddComment(new PostId(UUID.fromString("68eefe7a-6ef3-4003-98ea-87a6eab49756")), new CommentId(ID), "My remark."));
+    verify(gateway).send(new AddComment(POST_ID, COMMENT_ID, "My remark."));
   }
 
   @Test
   void updateComment() throws Exception {
-    String commentId = "68eefe7a-6ef3-4003-98ea-87a6eab49756";
-    mockMvc.perform(put("/api/comments/"+commentId).contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(put("/api/posts/{postId}/comments/{commentId}/update", POST_UUID, COMMENT_UUID).contentType(MediaType.APPLICATION_JSON)
                                                                            .content("""
                                                                                    {
                                                                                      "text": "My new remark."
                                                                                    }"""))
            .andExpect(status().isOk());
 
-    verify(gateway).send(new UpdateComment(CommentId.fromString(commentId), "My new remark."));
+    verify(gateway).send(new UpdateComment(POST_ID, COMMENT_ID, "My new remark."));
   }
 }
