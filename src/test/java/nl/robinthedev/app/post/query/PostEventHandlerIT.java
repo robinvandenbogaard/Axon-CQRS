@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-class PostEventHandlerTest {
+class PostEventHandlerIT {
 
   public static final UUID POST_UUID = UUID.randomUUID();
   private static final PostId POST_ID = new PostId(POST_UUID);
@@ -44,7 +44,7 @@ class PostEventHandlerTest {
     handler.handle(new PostCreated(POST_ID, new Post("x", "y")));
     handler.handle(new CommentAdded(POST_ID, new Comment(COMMENT_ID, "my comment")));
     assertThat(postRepository.findByPublicId(POST_UUID)).hasValueSatisfying(jpaPost -> assertThat(jpaPost.getComments()
-                                                                                                         .get(0)
+                                                                                                         .getFirst()
                                                                                                          .getText()).isEqualTo("my comment"));
   }
 }
