@@ -7,9 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import nl.robinthedev.app.api.model.Comment;
-
 import java.util.UUID;
+import nl.robinthedev.app.api.model.Comment;
 
 @Entity
 @Table(name = "comment")
@@ -28,7 +27,7 @@ class JpaComment {
   private JpaPost post;
 
   public JpaComment() {
-    //required by Hibernate
+    // required by Hibernate
   }
 
   public JpaComment(Comment comment) {
@@ -52,4 +51,3 @@ class JpaComment {
     return publicId;
   }
 }
-

@@ -1,11 +1,10 @@
 package nl.robinthedev.app.post.query;
 
+import java.util.List;
 import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.PostId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 class PostService {
@@ -24,7 +23,8 @@ class PostService {
   }
 
   private RPost toDto(JpaPost entity) {
-    return new RPost(entity.getPublicId(), entity.getTitle(), entity.getContent(), toDto(entity.getComments()));
+    return new RPost(
+        entity.getPublicId(), entity.getTitle(), entity.getContent(), toDto(entity.getComments()));
   }
 
   private List<RComment> toDto(List<JpaComment> comments) {

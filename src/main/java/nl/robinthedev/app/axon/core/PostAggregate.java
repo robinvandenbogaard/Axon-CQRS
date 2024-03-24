@@ -1,5 +1,9 @@
 package nl.robinthedev.app.axon.core;
 
+import static org.axonframework.modelling.command.AggregateLifecycle.apply;
+
+import java.util.ArrayList;
+import java.util.List;
 import nl.robinthedev.app.api.messaging.command.AddComment;
 import nl.robinthedev.app.api.messaging.command.CreatePost;
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
@@ -16,22 +20,16 @@ import org.axonframework.modelling.command.CreationPolicy;
 import org.axonframework.modelling.command.ForwardMatchingInstances;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.axonframework.modelling.command.AggregateLifecycle.apply;
-
 @Aggregate
 class PostAggregate {
 
-  @AggregateIdentifier
-  PostId postId;
+  @AggregateIdentifier PostId postId;
 
   @AggregateMember(eventForwardingMode = ForwardMatchingInstances.class)
   List<PostComment> comments = new ArrayList<>();
 
   public PostAggregate() {
-    //required by Axon
+    // required by Axon
   }
 
   @CommandHandler

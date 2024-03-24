@@ -1,5 +1,8 @@
 package nl.robinthedev.app.post.query;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.UUID;
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
 import nl.robinthedev.app.api.messaging.event.CommentUpdated;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
@@ -13,11 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
@@ -28,11 +26,9 @@ class PostEventHandlerIT {
   public static final UUID COMMENT_UUID = UUID.randomUUID();
   private static final CommentId COMMENT_ID = new CommentId(COMMENT_UUID);
 
-  @Autowired
-  private PostEventHandler handler;
+  @Autowired private PostEventHandler handler;
 
-  @Autowired
-  private PostRepository postRepository;
+  @Autowired private PostRepository postRepository;
 
   @Test
   void createdPost() {
@@ -45,10 +41,9 @@ class PostEventHandlerIT {
     handler.handle(new PostCreated(POST_ID, new Post("x", "y")));
     handler.handle(new CommentAdded(POST_ID, new Comment(COMMENT_ID, "my comment")));
     assertThat(postRepository.findByPublicId(POST_UUID))
-            .hasValueSatisfying(jpaPost ->
-            {
-              JpaComment comment = jpaPost.getComments()
-                                          .getFirst();
+        .hasValueSatisfying(
+            jpaPost -> {
+              JpaComment comment = jpaPost.getComments().getFirst();
               assertThat(comment.getText()).isEqualTo("my comment");
               assertThat(comment.getPublicId()).isEqualTo(COMMENT_ID.commentId());
             });
@@ -59,8 +54,9 @@ class PostEventHandlerIT {
     handler.handle(new PostCreated(POST_ID, new Post("x", "y")));
     handler.handle(new CommentAdded(POST_ID, new Comment(COMMENT_ID, "my comment")));
     handler.handle(new CommentUpdated(COMMENT_ID, "my comment", "my new comment"));
-    assertThat(postRepository.findByPublicId(POST_UUID)).hasValueSatisfying(jpaPost -> assertThat(jpaPost.getComments()
-                                                                                                         .getFirst()
-                                                                                                         .getText()).isEqualTo("my new comment"));
+    assertThat(postRepository.findByPublicId(POST_UUID))
+        .hasValueSatisfying(
+            jpaPost ->
+                assertThat(jpaPost.getComments().getFirst().getText()).isEqualTo("my new comment"));
   }
 }

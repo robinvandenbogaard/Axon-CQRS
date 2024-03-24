@@ -1,14 +1,12 @@
 package nl.robinthedev.app.post.query;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,7 +29,7 @@ class JpaPost {
   private List<JpaComment> comments = new ArrayList<>();
 
   protected JpaPost() {
-    //required by Hibernate
+    // required by Hibernate
   }
 
   public JpaPost(UUID publicId, String title, String content) {

@@ -4,5 +4,5 @@ import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.PostId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-public record UpdateComment(@TargetAggregateIdentifier PostId postId, CommentId commentId, String newText) {
-}
+public record UpdateComment(
+    @TargetAggregateIdentifier PostId postId, CommentId commentId, String newText) {}

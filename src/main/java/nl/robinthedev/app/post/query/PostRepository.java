@@ -1,9 +1,8 @@
 package nl.robinthedev.app.post.query;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 interface PostRepository extends JpaRepository<JpaPost, Long> {
 

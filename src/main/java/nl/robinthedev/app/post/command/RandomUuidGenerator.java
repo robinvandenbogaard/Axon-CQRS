@@ -1,8 +1,7 @@
 package nl.robinthedev.app.post.command;
 
-import org.springframework.stereotype.Component;
-
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
 @Component
 class RandomUuidGenerator implements UuidGenerator {
