@@ -1,4 +1,4 @@
-package nl.robinthedev.app.axon.core;
+package nl.robinthedev.app.post.axon;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
@@ -10,7 +10,7 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.EntityId;
 
-public class PostComment {
+class PostComment {
 
   @EntityId private final CommentId commentId;
 
@@ -23,7 +23,6 @@ public class PostComment {
 
   @CommandHandler
   void handle(UpdateComment updateComment) {
-    // check for profanity
     apply(new CommentUpdated(commentId, text, updateComment.newText()));
   }
 

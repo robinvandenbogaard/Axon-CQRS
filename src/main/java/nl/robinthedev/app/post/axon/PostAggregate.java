@@ -1,4 +1,4 @@
-package nl.robinthedev.app.axon.core;
+package nl.robinthedev.app.post.axon;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 

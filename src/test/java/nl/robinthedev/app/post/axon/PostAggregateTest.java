@@ -1,4 +1,4 @@
-package nl.robinthedev.app.axon.core;
+package nl.robinthedev.app.post.axon;
 
 import java.util.UUID;
 import nl.robinthedev.app.api.messaging.command.AddComment;
