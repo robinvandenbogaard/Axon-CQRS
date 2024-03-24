@@ -1,6 +1,7 @@
 package nl.robinthedev.app.post.query;
 
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.event.CommentUpdated;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
 import nl.robinthedev.app.api.model.Post;
 import org.axonframework.eventhandling.EventHandler;
@@ -26,5 +27,10 @@ class PostEventHandler {
   void handle(CommentAdded commentAdded) {
     JpaComment entity = new JpaComment(commentAdded.comment());
     postService.addCommentToPost(commentAdded.postId(), entity);
+  }
+
+  @EventHandler
+  public void handle(CommentUpdated commentUpdated) {
+    postService.updateCommentText(commentUpdated.commentId(), commentUpdated.newText());
   }
 }

@@ -40,6 +40,10 @@ class JpaComment {
     return text;
   }
 
+  public void setText(String text) {
+    this.text = text;
+  }
+
   public void setPost(JpaPost post) {
     this.post = post;
   }

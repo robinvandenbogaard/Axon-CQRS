@@ -1,5 +1,6 @@
 package nl.robinthedev.app.post.query;
 
+import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.PostId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +11,11 @@ import java.util.List;
 class PostService {
 
   private final PostRepository postRepository;
+  private final CommentRepository commentRepository;
 
-  PostService(PostRepository postRepository) {
+  PostService(PostRepository postRepository, CommentRepository commentRepository) {
     this.postRepository = postRepository;
+    this.commentRepository = commentRepository;
   }
 
   @Transactional
@@ -43,6 +46,15 @@ class PostService {
     if (post != null) {
       post.addComment(comment);
       postRepository.save(post);
+    }
+  }
+
+  @Transactional
+  public void updateCommentText(CommentId commentId, String newText) {
+    JpaComment comment = commentRepository.findByPublicId(commentId.commentId()).orElse(null);
+    if (comment != null) {
+      comment.setText(newText);
+      commentRepository.flush();
     }
   }
 }

@@ -53,4 +53,14 @@ class PostEventHandlerIT {
               assertThat(comment.getPublicId()).isEqualTo(COMMENT_ID.commentId());
             });
   }
+
+  @Test
+  void updatedComment() {
+    handler.handle(new PostCreated(POST_ID, new Post("x", "y")));
+    handler.handle(new CommentAdded(POST_ID, new Comment(COMMENT_ID, "my comment")));
+    handler.handle(new CommentUpdated(COMMENT_ID, "my comment", "my new comment"));
+    assertThat(postRepository.findByPublicId(POST_UUID)).hasValueSatisfying(jpaPost -> assertThat(jpaPost.getComments()
+                                                                                                         .getFirst()
+                                                                                                         .getText()).isEqualTo("my new comment"));
+  }
 }
