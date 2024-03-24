@@ -1,6 +1,7 @@
 package nl.robinthedev.app.post.query;
 
 import nl.robinthedev.app.api.messaging.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.event.CommentUpdated;
 import nl.robinthedev.app.api.messaging.event.PostCreated;
 import nl.robinthedev.app.api.model.Comment;
 import nl.robinthedev.app.api.model.CommentId;
@@ -43,8 +44,13 @@ class PostEventHandlerIT {
   void addedComment() {
     handler.handle(new PostCreated(POST_ID, new Post("x", "y")));
     handler.handle(new CommentAdded(POST_ID, new Comment(COMMENT_ID, "my comment")));
-    assertThat(postRepository.findByPublicId(POST_UUID)).hasValueSatisfying(jpaPost -> assertThat(jpaPost.getComments()
-                                                                                                         .getFirst()
-                                                                                                         .getText()).isEqualTo("my comment"));
+    assertThat(postRepository.findByPublicId(POST_UUID))
+            .hasValueSatisfying(jpaPost ->
+            {
+              JpaComment comment = jpaPost.getComments()
+                                          .getFirst();
+              assertThat(comment.getText()).isEqualTo("my comment");
+              assertThat(comment.getPublicId()).isEqualTo(COMMENT_ID.commentId());
+            });
   }
 }

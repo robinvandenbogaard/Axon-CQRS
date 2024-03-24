@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import nl.robinthedev.app.api.model.Comment;
 
 import java.util.UUID;
 
@@ -30,8 +31,9 @@ class JpaComment {
     //required by Hibernate
   }
 
-  public JpaComment(String text) {
-    this.text = text;
+  public JpaComment(Comment comment) {
+    this.publicId = comment.publicId().commentId();
+    this.text = comment.text();
   }
 
   public String getText() {

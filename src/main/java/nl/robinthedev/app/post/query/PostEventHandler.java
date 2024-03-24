@@ -24,7 +24,7 @@ class PostEventHandler {
 
   @EventHandler
   void handle(CommentAdded commentAdded) {
-    JpaComment entity = new JpaComment(commentAdded.comment().text());
+    JpaComment entity = new JpaComment(commentAdded.comment());
     postService.addCommentToPost(commentAdded.postId(), entity);
   }
 }
