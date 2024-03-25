@@ -1,8 +1,10 @@
 package nl.robinthedev.app.post.axon;
 
+import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 import nl.robinthedev.app.api.messaging.command.UpdateComment;
+import nl.robinthedev.app.api.messaging.event.CommentRejected;
 import nl.robinthedev.app.api.messaging.event.CommentUpdated;
 import nl.robinthedev.app.api.model.Comment;
 import nl.robinthedev.app.api.model.CommentId;
@@ -22,8 +24,19 @@ class PostComment {
   }
 
   @CommandHandler
-  void handle(UpdateComment updateComment) {
-    apply(new CommentUpdated(commentId, text, updateComment.newText()));
+  void handle(UpdateComment updateComment, ProfanityService profanityService) {
+    var profanityEvaluation = profanityService.calculateScore(updateComment.newText());
+
+    var event =
+        switch (profanityEvaluation) {
+          case Acceptable ignored -> new CommentUpdated(commentId, text, updateComment.newText());
+          case FailureToEvaluate ignored ->
+              new CommentUpdated(commentId, text, updateComment.newText());
+          case Unacceptable ignored ->
+              new CommentRejected(commentId, updateComment.newText(), "Bad language!");
+        };
+
+    apply(event);
   }
 
   @EventSourcingHandler
