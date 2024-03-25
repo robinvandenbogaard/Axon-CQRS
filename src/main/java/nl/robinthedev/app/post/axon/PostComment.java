@@ -30,10 +30,10 @@ class PostComment {
     var event =
         switch (profanityEvaluation) {
           case Acceptable ignored -> new CommentUpdated(commentId, text, updateComment.newText());
-          case FailureToEvaluate ignored ->
-              new CommentUpdated(commentId, text, updateComment.newText());
-          case Unacceptable ignored ->
-              new CommentRejected(commentId, updateComment.newText(), "Bad language!");
+          case FailureToEvaluate ignored -> new CommentUpdated(
+              commentId, text, updateComment.newText());
+          case Unacceptable ignored -> new CommentRejected(
+              commentId, updateComment.newText(), "Bad language!");
         };
 
     apply(event);
