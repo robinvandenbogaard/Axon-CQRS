@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.query;
+package nl.robinthedev.app.post.projection;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

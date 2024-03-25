@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.query;
+package nl.robinthedev.app.post.projection;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.query;
+package nl.robinthedev.app.post.projection;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.query;
+package nl.robinthedev.app.post.projection;
 
 import nl.robinthedev.app.api.messaging.post.event.CommentAdded;
 import nl.robinthedev.app.api.messaging.post.event.CommentUpdated;

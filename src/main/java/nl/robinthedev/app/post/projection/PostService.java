@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.query;
+package nl.robinthedev.app.post.projection;
 
 import java.util.List;
 import nl.robinthedev.app.api.messaging.post.model.CommentId;
