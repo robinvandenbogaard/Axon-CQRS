@@ -1,16 +1,16 @@
-package nl.robinthedev.app.post.axon;
+package nl.robinthedev.app.post.aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 import java.util.ArrayList;
 import java.util.List;
-import nl.robinthedev.app.api.messaging.command.AddComment;
-import nl.robinthedev.app.api.messaging.command.CreatePost;
-import nl.robinthedev.app.api.messaging.event.CommentAdded;
-import nl.robinthedev.app.api.messaging.event.PostCreated;
-import nl.robinthedev.app.api.model.Comment;
-import nl.robinthedev.app.api.model.Post;
-import nl.robinthedev.app.api.model.PostId;
+import nl.robinthedev.app.api.messaging.post.command.AddComment;
+import nl.robinthedev.app.api.messaging.post.command.CreatePost;
+import nl.robinthedev.app.api.messaging.post.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.post.event.PostCreated;
+import nl.robinthedev.app.api.messaging.post.model.Comment;
+import nl.robinthedev.app.api.messaging.post.model.Post;
+import nl.robinthedev.app.api.messaging.post.model.PostId;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateCreationPolicy;

@@ -1,18 +1,18 @@
-package nl.robinthedev.app.post.profanity;
+package nl.robinthedev.app.post.aggregate.profanity;
 
-import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
+import static nl.robinthedev.app.post.aggregate.ProfanityEvaluation.*;
 
 import java.util.concurrent.ExecutionException;
-import nl.robinthedev.app.api.messaging.query.CalculateProfanityScoreQuery;
-import nl.robinthedev.app.api.messaging.query.ProfanityScore;
-import nl.robinthedev.app.post.axon.ProfanityEvaluation;
-import nl.robinthedev.app.post.axon.ProfanityService;
+import nl.robinthedev.app.api.messaging.profanity.query.CalculateProfanityScoreQuery;
+import nl.robinthedev.app.api.messaging.profanity.query.ProfanityScore;
+import nl.robinthedev.app.post.aggregate.ProfanityEvaluation;
+import nl.robinthedev.app.post.aggregate.ProfanityService;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfanityQueryService implements ProfanityService {
+class ProfanityQueryService implements ProfanityService {
 
   private final QueryGateway queryGateway;
 

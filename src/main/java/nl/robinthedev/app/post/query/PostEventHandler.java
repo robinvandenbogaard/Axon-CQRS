@@ -1,9 +1,9 @@
 package nl.robinthedev.app.post.query;
 
-import nl.robinthedev.app.api.messaging.event.CommentAdded;
-import nl.robinthedev.app.api.messaging.event.CommentUpdated;
-import nl.robinthedev.app.api.messaging.event.PostCreated;
-import nl.robinthedev.app.api.model.Post;
+import nl.robinthedev.app.api.messaging.post.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.post.event.CommentUpdated;
+import nl.robinthedev.app.api.messaging.post.event.PostCreated;
+import nl.robinthedev.app.api.messaging.post.model.Post;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 

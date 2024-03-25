@@ -1,8 +1,8 @@
 package nl.robinthedev.app.post.query;
 
 import java.util.List;
-import nl.robinthedev.app.api.model.CommentId;
-import nl.robinthedev.app.api.model.PostId;
+import nl.robinthedev.app.api.messaging.post.model.CommentId;
+import nl.robinthedev.app.api.messaging.post.model.PostId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

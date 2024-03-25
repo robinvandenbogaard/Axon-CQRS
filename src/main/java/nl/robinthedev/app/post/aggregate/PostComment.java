@@ -1,13 +1,13 @@
-package nl.robinthedev.app.post.axon;
+package nl.robinthedev.app.post.aggregate;
 
-import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
+import static nl.robinthedev.app.post.aggregate.ProfanityEvaluation.*;
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
-import nl.robinthedev.app.api.messaging.command.UpdateComment;
-import nl.robinthedev.app.api.messaging.event.CommentRejected;
-import nl.robinthedev.app.api.messaging.event.CommentUpdated;
-import nl.robinthedev.app.api.model.Comment;
-import nl.robinthedev.app.api.model.CommentId;
+import nl.robinthedev.app.api.messaging.post.command.UpdateComment;
+import nl.robinthedev.app.api.messaging.post.event.CommentRejected;
+import nl.robinthedev.app.api.messaging.post.event.CommentUpdated;
+import nl.robinthedev.app.api.messaging.post.model.Comment;
+import nl.robinthedev.app.api.messaging.post.model.CommentId;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.EntityId;

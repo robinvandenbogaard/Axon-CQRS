@@ -7,11 +7,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.UUID;
-import nl.robinthedev.app.api.messaging.command.AddComment;
-import nl.robinthedev.app.api.messaging.command.CreatePost;
-import nl.robinthedev.app.api.messaging.command.UpdateComment;
-import nl.robinthedev.app.api.model.CommentId;
-import nl.robinthedev.app.api.model.PostId;
+import nl.robinthedev.app.api.messaging.post.command.AddComment;
+import nl.robinthedev.app.api.messaging.post.command.CreatePost;
+import nl.robinthedev.app.api.messaging.post.command.UpdateComment;
+import nl.robinthedev.app.api.messaging.post.model.CommentId;
+import nl.robinthedev.app.api.messaging.post.model.PostId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

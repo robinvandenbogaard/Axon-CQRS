@@ -1,6 +1,6 @@
-package nl.robinthedev.app.post.axon;
+package nl.robinthedev.app.post.aggregate;
 
-import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
+import static nl.robinthedev.app.post.aggregate.ProfanityEvaluation.*;
 
 public sealed interface ProfanityEvaluation permits Acceptable, Unacceptable, FailureToEvaluate {
 

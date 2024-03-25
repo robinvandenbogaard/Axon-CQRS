@@ -8,7 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.UUID;
-import nl.robinthedev.app.api.model.Comment;
+import nl.robinthedev.app.api.messaging.post.model.Comment;
 
 @Entity
 @Table(name = "comment")

@@ -2,8 +2,8 @@ package nl.robinthedev.app.profanity;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-import nl.robinthedev.app.api.messaging.query.CalculateProfanityScoreQuery;
-import nl.robinthedev.app.api.messaging.query.ProfanityScore;
+import nl.robinthedev.app.api.messaging.profanity.query.CalculateProfanityScoreQuery;
+import nl.robinthedev.app.api.messaging.profanity.query.ProfanityScore;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 

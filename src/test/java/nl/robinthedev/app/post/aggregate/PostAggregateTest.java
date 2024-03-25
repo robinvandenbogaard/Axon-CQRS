@@ -1,19 +1,19 @@
-package nl.robinthedev.app.post.axon;
+package nl.robinthedev.app.post.aggregate;
 
-import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
+import static nl.robinthedev.app.post.aggregate.ProfanityEvaluation.*;
 
 import java.util.UUID;
-import nl.robinthedev.app.api.messaging.command.AddComment;
-import nl.robinthedev.app.api.messaging.command.CreatePost;
-import nl.robinthedev.app.api.messaging.command.UpdateComment;
-import nl.robinthedev.app.api.messaging.event.CommentAdded;
-import nl.robinthedev.app.api.messaging.event.CommentRejected;
-import nl.robinthedev.app.api.messaging.event.CommentUpdated;
-import nl.robinthedev.app.api.messaging.event.PostCreated;
-import nl.robinthedev.app.api.model.Comment;
-import nl.robinthedev.app.api.model.CommentId;
-import nl.robinthedev.app.api.model.Post;
-import nl.robinthedev.app.api.model.PostId;
+import nl.robinthedev.app.api.messaging.post.command.AddComment;
+import nl.robinthedev.app.api.messaging.post.command.CreatePost;
+import nl.robinthedev.app.api.messaging.post.command.UpdateComment;
+import nl.robinthedev.app.api.messaging.post.event.CommentAdded;
+import nl.robinthedev.app.api.messaging.post.event.CommentRejected;
+import nl.robinthedev.app.api.messaging.post.event.CommentUpdated;
+import nl.robinthedev.app.api.messaging.post.event.PostCreated;
+import nl.robinthedev.app.api.messaging.post.model.Comment;
+import nl.robinthedev.app.api.messaging.post.model.CommentId;
+import nl.robinthedev.app.api.messaging.post.model.Post;
+import nl.robinthedev.app.api.messaging.post.model.PostId;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
