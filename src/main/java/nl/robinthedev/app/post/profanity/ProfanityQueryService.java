@@ -1,6 +1,5 @@
 package nl.robinthedev.app.post.profanity;
 
-
 import static nl.robinthedev.app.post.axon.ProfanityEvaluation.*;
 
 import java.util.concurrent.ExecutionException;

@@ -7,7 +7,6 @@ import nl.robinthedev.app.api.messaging.command.UpdateComment;
 import nl.robinthedev.app.api.model.CommentId;
 import nl.robinthedev.app.api.model.PostId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.eventhandling.gateway.EventGateway;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
