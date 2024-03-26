@@ -1,6 +1,7 @@
 package nl.robinthedev.app.post.projection;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,7 @@ class JpaPost {
 
   private String title;
 
+  @Column(length = 3000)
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)

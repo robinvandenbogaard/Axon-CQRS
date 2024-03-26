@@ -1,5 +1,6 @@
 package nl.robinthedev.app.post.projection;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,7 @@ class JpaComment {
 
   private UUID publicId;
 
+  @Column(length = 3000)
   private String text;
 
   @ManyToOne

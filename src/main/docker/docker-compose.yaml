@@ -27,9 +27,23 @@ services:
     environment:
       - host.db=postgres
       - host.axon=axon-server
+    depends_on:
+      - axon-server
+      - postgres
 
   cqrs-workers:
     image: dev/axon-cqrs
+    depends_on:
+      - cqrs-public
     environment:
       - host.db=postgres
       - host.axon=axon-server
+
+  spammer:
+    build: .
+    depends_on:
+      - cqrs-public
+    command:
+      - "10"
+      - "3"
+      - http://cqrs-public:8080

@@ -5,3 +5,19 @@ This application contains 4 modules:
  - **nl.robinthedev.app.post.command.*** -- A Rest API to create Posts and Comments and update Comments. This module only fires Commands to Axon.
  - **nl.robinthedev.app.profanity.*** -- A Profanity service that calculates a score for comments. Its a QueryHandler for Async goodness levering Axon's messaging.
  - **nl.robinthedev.app.post.projection.*** -- A Projection service that updates a database with events from the Aggregates and a simple listing Endpoint to list all posts with their messages.
+
+## Build the application image (needed in docker-compose)
+
+```shell
+mvn jib:dockerBuild
+```
+
+## Start up docker env
+
+## Run spammer
+
+In folder `src/main/docker`
+
+```shell
+docker compose up --build spammer 
+```
