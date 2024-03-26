@@ -19,3 +19,17 @@ services:
       - AXONIQ_AXONSERVER_HOSTNAME=axon-server
       - AXONIQ_AXONSERVER_STANDALONE=true
       - axoniq.axonserver.accesscontrol.enabled=false
+
+  cqrs-public:
+    image: dev/axon-cqrs
+    ports:
+      - "80:8080"
+    environment:
+      - host.db=postgres
+      - host.axon=axon-server
+
+  cqrs-workers:
+    image: dev/axon-cqrs
+    environment:
+      - host.db=postgres
+      - host.axon=axon-server
