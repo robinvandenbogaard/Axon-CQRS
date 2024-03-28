@@ -52,7 +52,7 @@ class SpamController {
     }
   }
 
-  private void editComment(PostId postId, CommentId commentId) throws InterruptedException {
+  private void editComment(PostId postId, CommentId commentId) {
     if (Math.random() < 0.5d) {
       gateway.sendAndWait(new UpdateComment(postId, commentId, lorem.getParagraphs(2, 4)));
     }
