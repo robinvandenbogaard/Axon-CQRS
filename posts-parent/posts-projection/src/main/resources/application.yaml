@@ -1,0 +1,26 @@
+host:
+  db: localhost
+  axon: localhost
+
+spring:
+  application:
+    name: posts-projection
+  datasource:
+    url: jdbc:postgresql://${host.db}:5432/postgres
+    password: postgres
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+axon:
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
+  axonserver:
+    servers: ${host.axon}:8124

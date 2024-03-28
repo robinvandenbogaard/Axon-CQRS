@@ -20,30 +20,52 @@ services:
       - AXONIQ_AXONSERVER_STANDALONE=true
       - axoniq.axonserver.accesscontrol.enabled=false
 
-  cqrs-public:
-    image: dev/axon-cqrs
+  posts-command:
+    image: dev/posts-command
+    ports:
+      - "81:8080"
+    environment:
+      - host.axon=axon-server
+    depends_on:
+      - axon-server
+
+  posts-aggregate:
+    image: dev/posts-aggregate
+    environment:
+      - host.axon=axon-server
+    depends_on:
+      - axon-server
+
+  posts-projection:
+    image: dev/posts-projection
     ports:
       - "80:8080"
     environment:
-      - host.db=postgres
       - host.axon=axon-server
+      - host.db=postgres
     depends_on:
       - axon-server
       - postgres
 
-  cqrs-workers:
-    image: dev/axon-cqrs
-    depends_on:
-      - cqrs-public
+  profanity-service:
+    image: dev/profanity-service
     environment:
-      - host.db=postgres
       - host.axon=axon-server
+    depends_on:
+      - axon-server
+
+  spammer-app:
+    image: dev/spammer-app
+    environment:
+      - host.axon=axon-server
+    depends_on:
+      - axon-server
 
   spammer:
     build: .
     depends_on:
-      - cqrs-public
+      - spammer-app
     command:
-      - "10"
-      - "3"
-      - http://cqrs-public:8080
+      - "40"
+      - "60"
+      - http://spammer-app:8080

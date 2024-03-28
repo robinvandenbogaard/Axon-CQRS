@@ -1,0 +1,13 @@
+host:
+  axon: localhost
+
+spring:
+  application:
+    name: profanity-service
+axon:
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
+  axonserver:
+    servers: ${host.axon}:8124
