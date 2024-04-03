@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculateProfanityScoreQueryHandler {
 
+  private static final Random RANDOM = new Random();
+
   @QueryHandler
   public CompletableFuture<ProfanityScore> handle(CalculateProfanityScoreQuery query) {
     int score = rateComment();
@@ -18,12 +20,12 @@ public class CalculateProfanityScoreQueryHandler {
   }
 
   private int rateComment() {
-    var randomValue = new Random().nextInt(100) + 1;
+    var randomValue = RANDOM.nextInt(100) + 1;
 
     // Determine if the random value meets the condition for being allowed
     int score = randomValue;
-    if (randomValue >= 80 && new Random().nextInt(100) < 5) { // 5% chance
-      score = new Random().nextInt(80) + 1; // generate a random score less than 80
+    if (randomValue >= 80 && RANDOM.nextInt(100) < 5) { // 5% chance
+      score = RANDOM.nextInt(80) + 1; // generate a random score less than 80
     }
     return score;
   }
