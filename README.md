@@ -9,7 +9,7 @@ This application contains 4 modules:
 ## Build the application image (needed in docker-compose)
 
 ```shell
-mvn jib:dockerBuild
+mvn package jib:dockerBuild
 ```
 
 ## Start up docker env
