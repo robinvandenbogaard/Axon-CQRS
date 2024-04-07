@@ -5,16 +5,21 @@ import java.util.concurrent.CompletableFuture;
 import nl.robinthedev.app.api.messaging.profanity.query.CalculateProfanityScoreQuery;
 import nl.robinthedev.app.api.messaging.profanity.query.ProfanityScore;
 import org.axonframework.queryhandling.QueryHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CalculateProfanityScoreQueryHandler {
 
+  private static final Logger log =
+      LoggerFactory.getLogger(CalculateProfanityScoreQueryHandler.class);
   private static final Random RANDOM = new Random();
 
   @QueryHandler
   public CompletableFuture<ProfanityScore> handle(CalculateProfanityScoreQuery query) {
     int score = rateComment();
+    log.info("Evaluated score for comment at {}.", score);
     ProfanityScore profanityScore = new ProfanityScore(score);
     return CompletableFuture.completedFuture(profanityScore);
   }
