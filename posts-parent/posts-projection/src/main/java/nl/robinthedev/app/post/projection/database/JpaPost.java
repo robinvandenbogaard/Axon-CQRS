@@ -1,8 +1,9 @@
-package nl.robinthedev.app.post.projection;
+package nl.robinthedev.app.post.projection.database;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,10 +12,12 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import nl.robinthedev.app.post.projection.core.model.Comment;
+import nl.robinthedev.app.post.projection.core.model.Post;
 
 @Entity
 @Table(name = "post")
-class JpaPost {
+public class JpaPost implements Post {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,7 @@ class JpaPost {
   @Column(length = 3000)
   private String content;
 
-  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<JpaComment> comments = new ArrayList<>();
 
   protected JpaPost() {
@@ -40,24 +43,32 @@ class JpaPost {
     this.content = content;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
   public List<JpaComment> getComments() {
     return comments;
-  }
-
-  public UUID getPublicId() {
-    return publicId;
   }
 
   public void addComment(JpaComment comment) {
     this.comments.add(comment);
     comment.setPost(this);
+  }
+
+  @Override
+  public UUID id() {
+    return publicId;
+  }
+
+  @Override
+  public String title() {
+    return title;
+  }
+
+  @Override
+  public String text() {
+    return content;
+  }
+
+  @Override
+  public List<? extends Comment> comments() {
+    return this.comments;
   }
 }

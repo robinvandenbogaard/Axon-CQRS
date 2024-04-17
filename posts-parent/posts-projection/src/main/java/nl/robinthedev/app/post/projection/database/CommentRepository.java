@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.projection;
+package nl.robinthedev.app.post.projection.database;
 
 import java.util.Optional;
 import java.util.UUID;

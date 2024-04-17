@@ -48,7 +48,16 @@
                 <groupId>org.axonframework</groupId>
                 <artifactId>axon-test</artifactId>
                 <version>${axon-spring-boot-starter.version}</version>
-                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit-junit5</artifactId>
+                <version>1.2.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

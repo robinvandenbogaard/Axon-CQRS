@@ -1,4 +1,4 @@
-package nl.robinthedev.app.post.projection;
+package nl.robinthedev.app.post.projection.database;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,11 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.UUID;
-import nl.robinthedev.app.api.messaging.post.model.Comment;
+import nl.robinthedev.app.post.projection.core.model.Comment;
 
 @Entity
 @Table(name = "comment")
-class JpaComment {
+public class JpaComment implements Comment {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +32,9 @@ class JpaComment {
     // required by Hibernate
   }
 
-  public JpaComment(Comment comment) {
-    this.publicId = comment.publicId().commentId();
-    this.text = comment.text();
+  public JpaComment(UUID publicId, String text) {
+    this.publicId = publicId;
+    this.text = text;
   }
 
   public String getText() {
@@ -51,5 +51,15 @@ class JpaComment {
 
   public UUID getPublicId() {
     return publicId;
+  }
+
+  @Override
+  public UUID id() {
+    return publicId;
+  }
+
+  @Override
+  public String text() {
+    return text;
   }
 }
